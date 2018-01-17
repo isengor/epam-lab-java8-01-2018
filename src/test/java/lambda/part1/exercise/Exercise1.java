@@ -45,7 +45,7 @@ public class Exercise1 {
         Arrays.sort(persons, new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
-                return o1.getAge()-o2.getAge();
+                return Integer.compare(o1.getAge(),o2.getAge());
             }
         });
 
@@ -60,8 +60,6 @@ public class Exercise1 {
     @Test
     public void sortPersonsByLastNameThenFirstNameUsingArraysSortAnonymousComparator() {
         Person[] persons = getPersons();
-
-        // TODO использовать Arrays.sort
 
         Arrays.sort(persons, new Comparator<Person>() {
             @Override
@@ -87,7 +85,6 @@ public class Exercise1 {
     public void findFirstWithAge30UsingGuavaPredicate() {
         List<Person> persons = Arrays.asList(getPersons());
 
-        // TODO использовать FluentIterable
         Predicate<Person> isAge30 = new Predicate<Person>() {
             @Override
             public boolean apply(Person person) {
@@ -105,8 +102,6 @@ public class Exercise1 {
     @Test
     public void findFirstWithAge30UsingGuavaAnonymousPredicate() {
         List<Person> persons = Arrays.asList(getPersons());
-
-        // TODO использовать FluentIterable
 
         Optional<Person> personOptional = FluentIterable.from(persons).firstMatch(new Predicate<Person>() {
             @Override
