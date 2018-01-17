@@ -22,7 +22,7 @@ public class Exercise1 {
         Comparator<Person> comparatorByAge = new Comparator<Person>() {
             @Override
             public int compare(Person left, Person right) {
-                return left.getAge() - right.getAge();
+                return Integer.compare(left.getAge(), right.getAge());
             }
         };
 
@@ -43,7 +43,7 @@ public class Exercise1 {
         Arrays.sort(persons, new Comparator<Person>() {
             @Override
             public int compare(Person left, Person right) {
-                return left.getAge() - right.getAge();
+                return Integer.compare(left.getAge(), right.getAge());
             }
         });
 
