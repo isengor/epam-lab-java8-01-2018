@@ -24,7 +24,7 @@ public class Exercise1 {
 
             @Override
             public int compare(Person o1, Person o2) {
-                return o1.getAge() - o2.getAge();
+                return Integer.compare(o1.getAge(), o2.getAge());
             }
         }
         Arrays.sort(persons, new AgeComparator());
@@ -45,7 +45,7 @@ public class Exercise1 {
         Arrays.sort(persons, new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
-                return o1.getAge() - o2.getAge();
+                return Integer.compare(o1.getAge(), o2.getAge());
             }
         });
 
