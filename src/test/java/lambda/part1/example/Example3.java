@@ -65,7 +65,7 @@ public class Example3 {
 
         // Без контекста лямбда-выражение бессмысленно
         // (left, right) -> left.getLastName().compareTo(right.getLastName())
-        // (Person left, Person right) -> left.getLastName().compareTo(right.getLastName())
+//        Comparator<Person> personComparator = (Person left, Person right) -> left.getLastName().compareTo(right.getLastName());
 
         assertArrayEquals(new Person[]{
             new Person("Алексей", "Доренко", 40),
