@@ -55,13 +55,14 @@ public class Exercise1 {
         Arrays.sort(persons, new Comparator<Person>() {
             @Override
             public int compare(Person left, Person right) {
-                if (left.getLastName().compareTo(right.getLastName()) == 0 ) {
-                    return left.getFirstName().compareTo(right.getFirstName());
-                } else {
-                    return left.getLastName().compareTo(right.getLastName());
-                }
+                return left.getLastName().compareTo(right.getLastName());
             }
-        });
+        }.thenComparing(new Comparator<Person>() {
+            @Override
+            public int compare(Person left, Person right) {
+                return left.getFirstName().compareTo(right.getFirstName());
+            }
+        }));
 
         assertArrayEquals(new Person[]{
                 new Person("Алексей", "Доренко", 40),
