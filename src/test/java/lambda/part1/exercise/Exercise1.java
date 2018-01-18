@@ -65,7 +65,7 @@ public class Exercise1 {
         Arrays.sort(persons, new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
-                return o1.getLastName().equals(o2.getLastName()) ? o1.getFirstName().compareTo(o2.getFirstName()) : o1.getLastName().compareTo(o2.getFirstName());
+                return o1.getLastName().equals(o2.getLastName()) ? o1.getFirstName().compareTo(o2.getFirstName()) : o1.getLastName().compareTo(o2.getLastName());
             }
         });
 
