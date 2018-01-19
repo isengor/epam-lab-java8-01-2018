@@ -36,8 +36,8 @@ public class Exercise3 {
         Person[] persons = getPersons();
 
         Arrays.sort(persons, ((Comparator<Person>) (left, right) ->
-                left.getFirstName().compareTo(right.getFirstName())
-        ).thenComparing((left, right) -> left.getLastName().compareTo(right.getLastName())));
+                left.getLastName().compareTo(right.getLastName())
+        ).thenComparing((left, right) -> left.getFirstName().compareTo(right.getFirstName())));
 
         //Arrays.sort(persons, Comparator.comparing(Person::getLastName)
         //        .thenComparing(Comparator.comparing(Person::getFirstName)));
