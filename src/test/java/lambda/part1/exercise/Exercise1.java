@@ -85,7 +85,7 @@ public class Exercise1 {
         Predicate<Person> predicate = new Predicate<Person>() {
             @Override
             public boolean apply(Person person) {
-                return Integer.compare(30, person.getAge()) == 0;
+                return 30 == person.getAge();
             }
         };
         Optional<Person> personOptional = FluentIterable.from(persons)
@@ -103,7 +103,7 @@ public class Exercise1 {
                                                         .firstMatch(new Predicate<Person>() {
                                                             @Override
                                                             public boolean apply(Person person) {
-                                                                return Integer.compare(30, person.getAge()) == 0;
+                                                                return 30==person.getAge();
                                                             }
                                                         });
         Person person = personOptional.isPresent() ? personOptional.get() : null;
