@@ -24,8 +24,9 @@ public class Example3 {
     // B -> C
     // A -> C
     // (Person -> String, String -> Integer) -> (Person -> Integer)
-    private Function<Person, Integer> personStringPropertyToInt(Function<Person, String> personToString,
-                                                                Function<String, Integer> stringToInteger) {
+    private Function<Person, Integer> personStringPropertyToInt(
+            Function<Person, String> personToString,
+            Function<String, Integer> stringToInteger) {
         return person -> stringToInteger.apply(personToString.apply(person));
     }
 
@@ -35,10 +36,9 @@ public class Example3 {
 
         Function<Person, String> personLastNameExtractor = Person::getLastName;
         Function<String, Integer> stringLengthExtractor = String::length;
-        Function<Person, Integer> personLastNameLengthExtractor =
-                personStringPropertyToInt(personLastNameExtractor, stringLengthExtractor);
+        Function<Person, Integer> personLastNameLengthExtractor = personStringPropertyToInt(personLastNameExtractor, stringLengthExtractor);
 
-        assertEquals(5, personLastNameLengthExtractor.apply(person).intValue());
+        assertEquals(9, personLastNameLengthExtractor.apply(person).intValue());
     }
 
     // (A -> B, B -> C) -> (A -> C)
@@ -65,6 +65,17 @@ public class Example3 {
         Function<Person, String> personLastNameExtractor = Person::getLastName;
         Function<String, Integer> stringLengthExtractor = String::length;
         Function<Person, Integer> lastNameLength = personLastNameExtractor.andThen(stringLengthExtractor);
+
+        assertEquals(9, lastNameLength.apply(person).intValue());
+    }
+
+    @Test
+    public void standardComposeFunction() {
+        Person person = new Person("Иван", "Мельников", 33);
+
+        Function<Person, String> personLastNameExtractor = Person::getLastName;
+        Function<String, Integer> stringLengthExtractor = String::length;
+        Function<Person, Integer> lastNameLength = stringLengthExtractor.compose(personLastNameExtractor);
 
         assertEquals(9, lastNameLength.apply(person).intValue());
     }
