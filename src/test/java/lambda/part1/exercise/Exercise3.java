@@ -1,5 +1,6 @@
 package lambda.part1.exercise;
 
+import com.google.common.collect.FluentIterable;
 import lambda.data.Person;
 import org.junit.Test;
 
@@ -49,8 +50,9 @@ public class Exercise3 {
     public void findFirstWithAge30UsingGuavaPredicateLambda() {
         List<Person> persons = Arrays.asList(getPersons());
 
-        Optional<Person> personOptional = persons.stream().filter(person -> 30 == person.getAge()).findFirst();
-        Person person = personOptional.orElse(null);
+        Person person = FluentIterable.from(persons)
+                                      .firstMatch(p -> p.getAge() == 30)
+                                      .orNull();
 
         assertEquals(new Person("Николай", "Зимов", 30), person);
     }
