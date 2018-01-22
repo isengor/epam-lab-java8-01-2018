@@ -1,5 +1,6 @@
 package lambda.part1.exercise;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import lambda.data.Person;
 import org.junit.Test;
@@ -52,10 +53,12 @@ public class Exercise3 {
 
         // TODO использовать FluentIterable
         Person person = null;
-        person = FluentIterable
+
+        Optional<Person> personOptional = FluentIterable
                 .from(persons)
-                .firstMatch(p -> p.getAge() == 30)
-                .get();
+                .firstMatch(p -> p.getAge() == 30);
+
+        if (personOptional.isPresent()) person = personOptional.get();
 
         assertEquals(new Person("Николай", "Зимов", 30), person);
     }
