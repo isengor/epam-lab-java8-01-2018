@@ -24,7 +24,8 @@ public class Example3 {
     // B -> C
     // A -> C
     // (Person -> String, String -> Integer) -> (Person -> Integer)
-    private Function<Person, Integer> personStringPropertyToInt(Function<Person, String> personToString, Function<String, Integer> stringToInteger) {
+    private Function<Person, Integer> personStringPropertyToInt(Function<Person, String> personToString,
+                                                                Function<String, Integer> stringToInteger) {
         return person -> stringToInteger.apply(personToString.apply(person));
     }
 
@@ -34,7 +35,8 @@ public class Example3 {
 
         Function<Person, String> personLastNameExtractor = Person::getLastName;
         Function<String, Integer> stringLengthExtractor = String::length;
-        Function<Person, Integer> personLastNameLengthExtractor = personStringPropertyToInt(personLastNameExtractor, stringLengthExtractor);
+        Function<Person, Integer> personLastNameLengthExtractor =
+                personStringPropertyToInt(personLastNameExtractor, stringLengthExtractor);
 
         assertEquals(5, personLastNameLengthExtractor.apply(person).intValue());
     }

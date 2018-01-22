@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Objects;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static org.junit.Assert.*;
 
@@ -30,6 +31,7 @@ public class Example1 {
 
         // Person -> String
         Function<Person, String> lastName = Person::getLastName;
+        Supplier<Person> p;
 
         assertEquals("Мельников", lastName.apply(person));
     }
