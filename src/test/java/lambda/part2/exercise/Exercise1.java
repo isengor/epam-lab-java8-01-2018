@@ -66,7 +66,7 @@ public class Exercise1 {
         Function<Person, String> getFullName = Exercise1::getFullName;
 
         BiFunction<Person, Person, Integer> extractorAgeOfPersonWithTheLongestFullName =
-                createExtractorAgeOfPersonWithTheLongestFullName(Person::getLastName);
+                createExtractorAgeOfPersonWithTheLongestFullName(Person::getFullName);
 
         assertEquals(33, extractorAgeOfPersonWithTheLongestFullName.apply(person1, person2).intValue());
     }
