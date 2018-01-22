@@ -50,19 +50,10 @@ public class Exercise3 {
     public void findFirstWithAge30UsingGuavaPredicateLambda() {
         List<Person> persons = Arrays.asList(getPersons());
 
-        Optional<Person> result = FluentIterable.from(persons)
-                .firstMatch(person -> {
-                    if (person == null) {
-                        return false;
-                    } else {
-                        return person.getAge() == 30;
-                    }
-                });
+        Person result = FluentIterable.from(persons)
+                .firstMatch(person -> person.getAge() == 30).orNull();
 
-        if (result.isPresent()) {
-            Person person = result.get();
-            assertEquals(new Person("Николай", "Зимов", 30), person);
-        }
+        assertEquals(new Person("Николай", "Зимов", 30), result);
     }
 
     private Person[] getPersons() {
