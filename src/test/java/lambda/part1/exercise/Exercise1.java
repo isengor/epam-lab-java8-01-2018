@@ -102,12 +102,12 @@ public class Exercise1 {
         Predicate<Person> isAge30Checker = new Predicate<Person>() {
             @Override
             public boolean apply(Person person) {
-                return person.getAge()==30;
+                return person.getAge() == 30;
             }
         };
         Optional<Person> personOptional = FluentIterable.from(persons)
                 .firstMatch(isAge30Checker);
-        if (personOptional.isPresent()){
+        if (personOptional.isPresent()) {
             person = personOptional.get();
         }
 
@@ -126,8 +126,8 @@ public class Exercise1 {
                 return person.getAge() == 30;
             }
         });
-        if (personOptional.isPresent()){
-            person=personOptional.get();
+        if (personOptional.isPresent()) {
+            person = personOptional.get();
         }
 
         assertEquals(new Person("Николай", "Зимов", 30), person);
