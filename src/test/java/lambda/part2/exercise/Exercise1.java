@@ -31,12 +31,7 @@ public class Exercise1 {
 
         // TODO создать переменную sameAgesChecker: (Person, Person) -> boolean, используя BiPredicate
 
-        BiPredicate<Person,Person> sameAgesChecker = new BiPredicate<Person, Person>() {
-            @Override
-            public boolean test(Person person, Person person2) {
-                return person.getAge() == person2.getAge();
-            }
-        };
+        BiPredicate<Person,Person> sameAgesChecker = (person, person21) -> person.getAge() == person21.getAge();
 
         assertTrue(sameAgesChecker.test(person1, person2));
         assertFalse(sameAgesChecker.test(person1, person3));
@@ -53,14 +48,11 @@ public class Exercise1 {
     // TODO - принимающий способ извлечения полного имени из объекта Person
     // TODO - возвращающий BiFunction, сравнивающий два объекта Person и возвращающий возраст того, чье полное имя длиннее.
     private static BiFunction<Person,Person,Integer> createExtractorAgeOfPersonWithTheLongestFullName(Function<Person,String> function) {
-        return new BiFunction<Person, Person, Integer>() {
-            @Override
-            public Integer apply(Person person, Person person2) {
-                if (function.apply(person).length() > function.apply(person2).length()){
-                    return person.getAge();
-                } else {
-                    return person2.getAge();
-                }
+        return (person, person2) -> {
+            if (function.apply(person).length() > function.apply(person2).length()){
+                return person.getAge();
+            } else {
+                return person2.getAge();
             }
         };
     }
