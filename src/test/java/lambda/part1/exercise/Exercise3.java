@@ -4,6 +4,7 @@ import lambda.data.Person;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -16,13 +17,13 @@ public class Exercise3 {
     public void sortPersonsByAgeUsingArraysSortExpressionLambda() {
         Person[] persons = getPersons();
 
-        // TODO использовать Arrays.sort + expression-lambda
+        Arrays.sort(persons, (left, right) -> Integer.compare(left.getAge(), right.getAge()));
 
         assertArrayEquals(new Person[]{
-            new Person("Иван", "Мельников", 20),
-            new Person("Николай", "Зимов", 30),
-            new Person("Алексей", "Доренко", 40),
-            new Person("Артем", "Зимов", 45)
+                new Person("Иван", "Мельников", 20),
+                new Person("Николай", "Зимов", 30),
+                new Person("Алексей", "Доренко", 40),
+                new Person("Артем", "Зимов", 45)
         }, persons);
     }
 
@@ -30,13 +31,16 @@ public class Exercise3 {
     public void sortPersonsByLastNameThenFirstNameUsingArraysSortExpressionLambda() {
         Person[] persons = getPersons();
 
-        // TODO использовать Arrays.sort + statement-lambda
+        Arrays.sort(persons, (left, right) -> {
+            int lastNameComparing = left.getLastName().compareTo(right.getLastName());
+            return lastNameComparing == 0 ? left.getFirstName().compareTo(right.getFirstName()) : lastNameComparing;
+        });
 
         assertArrayEquals(new Person[]{
-            new Person("Алексей", "Доренко", 40),
-            new Person("Артем", "Зимов", 45),
-            new Person("Николай", "Зимов", 30),
-            new Person("Иван", "Мельников", 20)
+                new Person("Алексей", "Доренко", 40),
+                new Person("Артем", "Зимов", 45),
+                new Person("Николай", "Зимов", 30),
+                new Person("Иван", "Мельников", 20)
         }, persons);
     }
 
@@ -52,10 +56,10 @@ public class Exercise3 {
 
     private Person[] getPersons() {
         return new Person[]{
-            new Person("Иван", "Мельников", 20),
-            new Person("Алексей", "Доренко", 40),
-            new Person("Николай", "Зимов", 30),
-            new Person("Артем", "Зимов", 45)
+                new Person("Иван", "Мельников", 20),
+                new Person("Алексей", "Доренко", 40),
+                new Person("Николай", "Зимов", 30),
+                new Person("Артем", "Зимов", 45)
         };
     }
 }
