@@ -23,14 +23,7 @@ public class Exercise1 {
         class AgeComparator implements Comparator<Person> {
             @Override
             public int compare(Person left, Person right) {
-                // FIXME потенциальная ошибка
-                if (left.getAge() > right.getAge()) {
-                    return 1;
-                } else if (left.getAge() == right.getAge()) {
-                    return 0;
-                } else {
-                    return -1;
-                }
+                return Integer.compare(left.getAge(), right.getAge());
             }
         }
 
@@ -47,17 +40,10 @@ public class Exercise1 {
     public void sortPersonsByAgeUsingArraysSortAnonymousComparator() {
         Person[] persons = getPersons();
 
-        // TODO использовать Arrays.sort
         Arrays.sort(persons, new Comparator<Person>() {
             @Override
             public int compare(Person left, Person right) {
-                if (left.getAge() > right.getAge()) {
-                    return 1;
-                } else if (left.getAge() == right.getAge()) {
-                    return 0;
-                } else {
-                    return -1;
-                }
+                return Integer.compare(left.getAge(), right.getAge());
             }
         });
 
@@ -83,8 +69,6 @@ public class Exercise1 {
             }
         });
 
-        // TODO использовать Arrays.sort
-
         assertArrayEquals(new Person[]{
                 new Person("Алексей", "Доренко", 40),
                 new Person("Артем", "Зимов", 45),
@@ -105,11 +89,9 @@ public class Exercise1 {
                 return person.getAge() == 30;
             }
         };
-        Optional<Person> personOptional = FluentIterable.from(persons)
-                .firstMatch(isAge30Checker);
-        if (personOptional.isPresent()) {
-            person = personOptional.get();
-        }
+        person = FluentIterable.from(persons)
+                .firstMatch(isAge30Checker)
+                .orNull();
 
         assertEquals(new Person("Николай", "Зимов", 30), person);
     }
@@ -120,15 +102,15 @@ public class Exercise1 {
 
         // TODO использовать FluentIterable
         Person person = null;
-        Optional<Person> personOptional = FluentIterable.from(persons).firstMatch(new Predicate<Person>() {
-            @Override
-            public boolean apply(Person person) {
-                return person.getAge() == 30;
-            }
-        });
-        if (personOptional.isPresent()) {
-            person = personOptional.get();
-        }
+        Optional<Person> personOptional = FluentIterable
+                .from(persons)
+                .firstMatch(new Predicate<Person>() {
+                    @Override
+                    public boolean apply(Person person) {
+                        return person.getAge() == 30;
+                    }
+                });
+        person = personOptional.orNull();
 
         assertEquals(new Person("Николай", "Зимов", 30), person);
     }
