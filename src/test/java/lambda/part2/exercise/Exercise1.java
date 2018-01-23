@@ -41,7 +41,7 @@ public class Exercise1 {
 
     // TODO метод getFullName: Person -> String, извлекающий из объекта Person строку в формате "имя фамилия".
      private static String getFullName(Person person) {
-        return person.getFirstName() + person.getLastName();
+        return person.getFullName();
      }
 
     // TODO метод createExtractorAgeOfPersonWithTheLongestFullName: (Person -> String) -> ((Person, Person) -> int),
@@ -53,8 +53,7 @@ public class Exercise1 {
              int person1Length = extractor.apply(person1).length();
              int person2Length = extractor.apply(person2).length();
 
-             if (person1Length >= person2Length) return person1.getAge();
-             else return person2.getAge();
+             return person1Length >= person2Length ? person1.getAge() : person2.getAge();
          };
      }
 
@@ -66,7 +65,7 @@ public class Exercise1 {
         Function<Person, String> getFullName = Exercise1::getFullName;
 
         BiFunction<Person, Person, Integer> extractorAgeOfPersonWithTheLongestFullName =
-                createExtractorAgeOfPersonWithTheLongestFullName(Person::getFullName);
+                createExtractorAgeOfPersonWithTheLongestFullName(getFullName);
 
         assertEquals(33, extractorAgeOfPersonWithTheLongestFullName.apply(person1, person2).intValue());
     }
