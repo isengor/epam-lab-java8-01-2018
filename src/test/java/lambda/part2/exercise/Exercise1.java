@@ -30,7 +30,7 @@ public class Exercise1 {
         Person person2 = new Person("Дмитрий", "Гущин", 33);
         Person person3 = new Person("Илья", "Жирков", 22);
 
-        BiPredicate<Person, Person> sameAgesChecker = (person, other) -> Objects.equals(person.getAge(), other.getAge());
+        BiPredicate<Person, Person> sameAgesChecker = (person, other) -> person.getAge() == other.getAge();
 
         assertTrue(sameAgesChecker.test(person1, person2));
         assertFalse(sameAgesChecker.test(person1, person3));
@@ -38,7 +38,7 @@ public class Exercise1 {
     }
 
     private static String getFullName(Person person) {
-        return person.getFirstName() + " " + person.getLastName();
+        return person.getFullName();
     }
 
     private static BiFunction<Person, Person, Integer> createExtractorAgeOfPersonWithTheLongestFullName(Function<Person, String> fullNameExtractor) {
