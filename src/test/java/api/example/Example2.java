@@ -1,4 +1,4 @@
-package api;
+package api.example;
 
 import lambda.data.Person;
 import org.junit.Test;

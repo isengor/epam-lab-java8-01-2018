@@ -1,4 +1,4 @@
-package api;
+package api.example;
 
 import org.junit.Test;
 
