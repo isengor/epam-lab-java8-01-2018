@@ -1,4 +1,4 @@
-package api;
+package api.example;
 
 import lambda.data.JobHistoryEntry;
 import lambda.data.Person;
