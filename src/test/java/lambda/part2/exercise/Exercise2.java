@@ -32,7 +32,7 @@ public class Exercise2 {
     // TODO - возвращает новый предикат, объединяющий исходные с помощью операции "AND"
     // TODO - при реализации использовать логический оператор &&
     private Predicate<Person> andUsingLogicalOperator(Predicate<Person> left, Predicate<Person> right) {
-        return left.and(right);
+        return p -> left.test(p) && right.test(p);
     }
 
     @Test
@@ -72,7 +72,7 @@ public class Exercise2 {
         Predicate<Person> personHasNotEmptyFirstName = negate(personHasEmptyFirstName);
         Predicate<Person> personHasNotEmptyLastName = negate(personHasEmptyLastName);
 
-        Predicate<Person> personHasNotEmptyLastNameAndFirstName = personHasNotEmptyFirstName.and(personHasNotEmptyLastName);
+        Predicate<Person> personHasNotEmptyLastNameAndFirstName = and(personHasNotEmptyFirstName,personHasNotEmptyLastName);
 
         assertTrue(personHasNotEmptyLastNameAndFirstName.test(new Person("Алексей", "Доренко", 40)));
         assertFalse(personHasNotEmptyLastNameAndFirstName.test(new Person("Николай", "", 30)));
