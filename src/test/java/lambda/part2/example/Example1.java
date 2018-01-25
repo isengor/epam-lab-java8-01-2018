@@ -32,6 +32,7 @@ public class Example1 {
 
         // Person -> String
         Function<Person, String> lastName = Person::getLastName;
+        Supplier<Person> p;
 
         Supplier<String> supplierLastName = person::getLastName;
 

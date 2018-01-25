@@ -57,6 +57,7 @@ public class Example3 {
         assertEquals(9, lastNameLength.apply(person).intValue());
     }
 
+
     @Test
     public void standardAndThenFunction() {
         Person person = new Person("Иван", "Мельников", 33);
