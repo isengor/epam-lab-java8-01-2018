@@ -1,11 +1,15 @@
 package streams.part1.exercise;
 
 import lambda.data.Employee;
+import lambda.data.JobHistoryEntry;
 import lambda.data.Person;
 import lambda.part3.example.Example1;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.ToDoubleFunction;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +20,8 @@ public class Exercise2 {
     public void calcAverageAgeOfEmployees() {
         List<Employee> employees = Example1.getEmployees();
 
-        Double expected = null;
+        Double expected = employees.stream().map(p -> p.getPerson().getAge()).collect(Collectors.averagingDouble(d -> d.doubleValue()));
+
 
         assertEquals(33.66, expected, 0.1);
     }
@@ -25,7 +30,7 @@ public class Exercise2 {
     public void findPersonWithLongestFullName() {
         List<Employee> employees = Example1.getEmployees();
 
-        Person expected = null;
+        Person expected = employees.stream().map(p -> p.getPerson()).min((a, b) -> b.getFullName().length() - a.getFullName().length()).get();
 
         assertEquals(expected, employees.get(1).getPerson());
     }
@@ -34,7 +39,14 @@ public class Exercise2 {
     public void findEmployeeWithMaximumDurationAtOnePosition() {
         List<Employee> employees = Example1.getEmployees();
 
-        Employee expected = null;
+        Employee expected = employees
+                        .stream()
+                        .max(Comparator.comparingInt(e -> e.getJobHistory()
+                        .stream()
+                        .mapToInt(JobHistoryEntry::getDuration)
+                        .max()
+                        .orElseThrow(IllegalAccessError::new)))
+                        .get();
 
         assertEquals(expected, employees.get(4));
     }
@@ -44,11 +56,19 @@ public class Exercise2 {
      * Базовая ставка каждого сотрудника составляет 75_000.
      * Если на текущей позиции (последняя в списке) он работает больше трех лет - ставка увеличивается на 20%
      */
+
+    ToDoubleFunction<Employee> mapEmployeeSalary = e -> {
+                    Double baseSalary = 75_000.0;
+                    List<JobHistoryEntry> jobHistory = e.getJobHistory();
+                    JobHistoryEntry currentJob = jobHistory.get(jobHistory.size()-1);
+                    return  currentJob.getDuration() < 3 ? baseSalary : 1.2 * baseSalary;
+                };
+
     @Test
     public void calcTotalSalaryWithCoefficientWorkExperience() {
         List<Employee> employees = Example1.getEmployees();
 
-        Double expected = null;
+        Double expected = employees.stream().mapToDouble(mapEmployeeSalary).sum();
 
         assertEquals(465000.0, expected, 0.001);
     }
